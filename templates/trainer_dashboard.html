@@ -1,0 +1,111 @@
+
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+
+    <!-- chartjs-adapter-moment eklentisi -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        padding: 12px;
+        z-index: 1;
+      }
+  
+      .dropdown-button {
+        cursor: pointer;
+      }
+
+      body{
+        font-family: 'Oswald', sans-serif;
+      }
+    </style>
+
+
+
+  </head>
+<body>
+
+  <header class="d-flex justify-content-between" style="background-color: #242422; color: whitesmoke;">
+    <div class="title p-4"><h1>BALBOA FITNESS CLUB</h1></div>
+    <div class="title p-4"><h1>{{user.first_name}}</h1></div>
+</header>
+    {% if user.is_authenticated and user.trainer %}
+    <div class="row">
+    <div class="col-md-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 600px;" >
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+          <ul class="navbar-nav flex-column justify-content-between" style="height: 300px;" >
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'trainer_profile'%}" style="font-size: 27px;">Profil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'trainer_inbox'%}" style="font-size: 27px;">Mesajlar</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'get_clients'%}" style="font-size: 27px;">Danışanlar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'create_program'%}" style="font-size: 27px;">Egzersiz Programı Oluştur</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'create_nutrition'%}" style="font-size: 27px;">Beslenme Programı Oluştur</a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'logout'%}" style="font-size: 27px;">Çıkış</a>
+          </li>
+         
+          
+            
+            <!-- Diğer menü öğeleri... -->
+          </ul>
+        <!-- </div> -->
+      </nav>
+    </div>
+  
+
+    <div class="col-md-8 mt-4">
+        
+      <div class="container">
+          {%block content%}
+
+          {%endblock%}
+      </div>
+  </div>
+    </div>
+    
+    </div>
+    
+    
+    {% else %}
+    {% endif %}
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

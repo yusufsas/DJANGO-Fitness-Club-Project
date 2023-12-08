@@ -1,0 +1,365 @@
+{%extends 'client_dashboard.html'%}
+
+{% load static %}
+
+
+{%block title%}İlerleme Kayıtları{%endblock%}
+
+
+
+
+{%block content%}
+<h1 class="display-6 mt-2 mb-3">İlerleme Kayıtları</h1>
+
+{{chart_data|safe}}
+
+<div class="d-flex ">
+<div>
+    <h2>Haftalık Kalori Grafiği</h2>
+    <div style="height: 350px; width: 350px;">
+        <canvas id="coloryChart" width="400" height="200"></canvas>
+    </div>
+</div>
+<div>
+    <h2>Haftalık Kilo Grafiği</h2>
+    <div style="height: 350px; width: 350px;">
+        <canvas id="weightChart" width="400" height="200"></canvas>
+    </div>
+</div>
+<div>
+    <h2>Haftalık Yağ ve Kas Kütlesi Grafiği</h2>
+    <div style="height: 350px; width: 350px;">
+        <canvas id="muscleChart" width="400" height="200"></canvas>
+    </div>
+</div>
+
+</div>
+
+<div class="d-flex ">
+    <div>
+        <h2>Günlük Kalori Grafiği</h2>
+        <div style="height: 350px; width: 350px;">
+            <canvas id="dcoloryChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    <div>
+        <h2>Günlük Kilo Grafiği</h2>
+        <div style="height: 350px; width: 350px;">
+            <canvas id="dweightChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    <div>
+        <h2>Günlük Yağ ve Kas Kütlesi Grafiği</h2>
+        <div style="height: 350px; width: 350px;">
+            <canvas id="dmuscleChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    
+    </div>
+
+<div style="width: 300px;">
+<form method="post" action="{%url 'progress'%}" enctype="multipart/form-data" class="mt-5">
+    {% csrf_token %}
+   
+    <div class="form-group my-1">
+        <label for="weigh">Kilo:</label>
+        <input type="number" name="weigh" id="weigh" class="form-control" required>
+    </div>
+
+    <!-- Profil resmi yükleme girişi -->
+    <div class="form-group my-1">
+        <label for="height">Boy:</label>
+        <input type="number" name="height" id="height"  class="form-control" required>
+    </div>
+    <!-- <div class="form-group my-1">
+        <label for="proportion">Vucut Yağ Oranı:</label>
+        <input type="number" name="proportion" id="proportion"  class="form-control" required>
+    </div> -->
+    <div class="form-group my-1">
+        <label for="muscle">Kas Kütlesi:</label>
+        <input type="number" name="muscle" id="muscle"  class="form-control" required>
+    </div>
+    <!-- <div class="form-group my-1">
+        <label for="index">Vucut Kitle İndeksi:</label>
+        <input type="number" name="index" id="index"  class="form-control" required>
+    </div> -->
+    
+
+
+    <button  type="submit" class="btn btn-secondary mt-3">Ölçüm Ekle</button>
+</form>
+</div>
+
+{%for measurement in client.measurement.all%}
+
+
+<h1>{{measurement.height}}</h1>
+
+
+{%endfor%}
+
+
+<script>
+var json={{chart_data|safe}};
+
+
+console.log(json)
+var xValues = json.height;
+var yValues = json.labels;
+
+// Canvas elementini seçin
+var calory = document.getElementById('coloryChart').getContext('2d');
+var weight=document.getElementById('weightChart').getContext('2d');
+var muscleChart=document.getElementById('muscleChart').getContext('2d');
+var dcalory = document.getElementById('dcoloryChart').getContext('2d');
+var dweight=document.getElementById('dweightChart').getContext('2d');
+var dmuscleChart=document.getElementById('dmuscleChart').getContext('2d');
+// Line grafik oluşturun
+var caloryChart = new Chart(calory, {
+        type: 'line',
+        data: {
+            labels: yValues,
+            datasets: [{
+                label: 'Calories',
+                data: xValues,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'YYYY-MM-DD'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Float Values'
+                    }
+                }
+            }
+        }
+    });
+
+    var xVal=json.weight;
+    var weightChart = new Chart(weight, {
+        type: 'line',
+        data: {
+            labels: yValues,
+            datasets: [{
+                label: 'Weights',
+                data: xVal,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            },
+           
+        ]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'YYYY-MM-DD'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Float Values'
+                    }
+                }
+            }
+        }
+    });
+    var xVal=json.weight;
+    var weightChart = new Chart(muscleChart, {
+        type: 'line',
+        data: {
+            labels: yValues,
+            datasets: [{
+                label: 'Weights',
+                data: xVal,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            },
+            {
+                    label: 'Line 2',
+                    data: json.height,
+                    fill: false,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                    pointRadius: 5,
+                    pointHoverRadius: 8
+                }
+        ]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'YYYY-MM-DD'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Float Values'
+                    }
+                }
+            }
+        }
+    });
+
+    var caloryChart = new Chart(dcalory, {
+        type: 'line',
+        data: {
+            labels: yValues,
+            datasets: [{
+                label: 'Calories',
+                data: xValues,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'YYYY-MM-DD'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Float Values'
+                    }
+                }
+            }
+        }
+    });
+
+    var xVal=json.weight;
+    var weightChart = new Chart(dweight, {
+        type: 'line',
+        data: {
+            labels: yValues,
+            datasets: [{
+                label: 'Weights',
+                data: xVal,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            },
+           
+        ]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'YYYY-MM-DD'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Float Values'
+                    }
+                }
+            }
+        }
+    });
+    var xVal=json.weight;
+    var weightChart = new Chart(dmuscleChart, {
+        type: 'line',
+        data: {
+            labels: yValues,
+            datasets: [{
+                label: 'Weights',
+                data: xVal,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            },
+            {
+                    label: 'Line 2',
+                    data: json.height,
+                    fill: false,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                    pointRadius: 5,
+                    pointHoverRadius: 8
+                }
+        ]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'YYYY-MM-DD'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Float Values'
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+
+{%endblock%}

@@ -1,0 +1,16 @@
+.masthead {
+    
+    background-image: url('../img/OGoOmxs.webp');
+    height: 700px;
+    background-size: cover;
+    background-position:top;
+    background-repeat: no-repeat;
+    
+    /* opacity: 0.8; */
+
+    
+   
+}
+img{
+    object-fit: cover;
+}

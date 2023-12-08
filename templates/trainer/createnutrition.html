@@ -1,0 +1,248 @@
+{%extends 'trainer_dashboard.html'%}
+
+{% load static %}
+
+
+{%block title%}Beslenme Program Oluştur{%endblock%}
+
+
+
+
+{%block content%}
+
+
+<h1 class="display-6 mt-2 mb-3">Beslenme Programı Oluştur</h1>
+
+
+
+<div>
+    <form method="post" action="{%url 'create_nutrition'%}">
+        {%csrf_token%}
+        <h5>Kullanıcılar</h5>
+        {%for client in clients%}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="client" value="{{client.id}}" id="{{client}}">
+                <label class="form-check-label" for="{{client}}">
+                  {{client.user.username}}
+                </label>
+              </div>
+    
+              {%endfor%}
+             
+        <div class="container mt-5">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Pazartesi</th>
+                  <th scope="col">Salı</th>
+                  <th scope="col">Çarşamba</th>
+                  <th scope="col">Perşembe</th>
+                  <th scope="col">Cuma</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown1')">Besin Seç</button>
+                    <div id="dropdown1" class="dropdown-content">
+                      {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio1" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown2')">Besin Seç</button>
+                    <div id="dropdown2" class="dropdown-content">
+                      {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio2" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown3')">Besin Seç</button>
+                    <div id="dropdown3" class="dropdown-content">
+                      {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio3" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown4')">Besin Seç</button>
+                    <div id="dropdown4" class="dropdown-content">
+                      {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio4" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown5')">Besin Seç</button>
+                    <div id="dropdown5" class="dropdown-content">
+                      {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio5" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                </tr>
+
+                <tr>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown6')">Besin Seç</button>
+                      <div id="dropdown6" class="dropdown-content">
+                        {%for food in foods%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio6" value="{{food.id}}" id="{{food}}">
+                          <label class="form-check-label" for="{{food}}">
+                            {{food.name}}{{food.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown7')">Besin Seç</button>
+                      <div id="dropdown7" class="dropdown-content">
+                        {%for food in foods%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio7" value="{{food.id}}" id="{{food}}">
+                          <label class="form-check-label" for="{{food}}">
+                            {{food.name}}{{food.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown8')">Besin Seç</button>
+                      <div id="dropdown8" class="dropdown-content">
+                        {%for food in foods%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio8" value="{{food.id}}" id="{{food}}">
+                          <label class="form-check-label" for="{{food}}">
+                            {{food.name}}{{food.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown9')">Besin Seç</button>
+                      <div id="dropdown9" class="dropdown-content">
+                        {%for food in foods%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio9" value="{{food.id}}" id="{{food}}">
+                          <label class="form-check-label" for="{{food}}">
+                            {{food.name}}{{food.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown10')">Besin Seç</button>
+                      <div id="dropdown10" class="dropdown-content">
+                        {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio10" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                      </div></td>
+                  </tr>
+                  <tr>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown11')">Besin Seç</button>
+                      <div id="dropdown11" class="dropdown-content">
+                        {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio11" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown12')">Besin Seç</button>
+                      <div id="dropdown12" class="dropdown-content">
+                        {%for food in foods%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio12" value="{{food.id}}" id="{{food}}">
+                          <label class="form-check-label" for="{{food}}">
+                            {{food.name}}{{food.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown13')">Besin Seç</button>
+                      <div id="dropdown13" class="dropdown-content">
+                        {%for food in foods%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio13" value="{{food.id}}" id="{{food}}">
+                          <label class="form-check-label" for="{{food}}">
+                            {{food.name}}{{food.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown14')">Besin Seç</button>
+                      <div id="dropdown14" class="dropdown-content">
+                        {%for food in foods%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio14" value="{{food.id}}" id="{{food}}">
+                        <label class="form-check-label" for="{{food}}">
+                          {{food.name}}{{food.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown15')">Besin Seç</button>
+                      <div id="dropdown15" class="dropdown-content">
+                        {%for food in foods%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio15" value="{{food.id}}" id="{{food}}">
+                          <label class="form-check-label" for="{{food}}">
+                            {{food.name}}{{food.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                  </tr>
+                
+                <!-- Diğer satırları buraya ekleyebilirsiniz -->
+              </tbody>
+            </table>
+          </div>
+          <button  type="submit" class="btn btn-secondary mt-3">Oluştur</button>
+    </form>
+</div>
+
+
+
+<script>
+    function toggleDropdown(dropdownId) {
+      var dropdown = document.getElementById(dropdownId);
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      } else {
+        // Hide all other dropdowns
+        var allDropdowns = document.querySelectorAll('.dropdown-content');
+        allDropdowns.forEach(function(item) {
+          item.style.display = 'none';
+        });
+  
+        // Show the clicked dropdown
+        dropdown.style.display = "block";
+      }
+    }
+  </script>
+
+
+
+
+{%endblock%}

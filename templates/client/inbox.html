@@ -1,0 +1,71 @@
+{%extends 'client_dashboard.html'%}
+
+{% load static %}
+
+
+{%block title%}Mesajlar{%endblock%}
+
+
+
+
+{%block content%}
+
+<h1 class="display-6 mt-2 mb-3">Mesajlar</h1>
+
+<ul class="list-group my-5">
+<!--     
+        <li class="list-group-item py-2">
+            <strong> message.sender.username </strong>: message.content 
+        </li>
+        <li class="list-group-item py-2">
+            <strong> message.sender.username </strong>: message.content 
+        </li>
+        <li class="list-group-item py-2">
+            <strong> message.sender.username </strong>: message.content 
+        </li>
+        <li class="list-group-item py-2">
+            <strong> message.sender.username </strong>: message.content 
+        </li> -->
+
+        {%for message in messages%}
+       
+
+
+
+        {%if message.receiver == user %}
+        <li class="list-group-item py-2">
+            <strong>FROM {{message.sender}}</strong>
+            <p>{{message.timestamp}}  {{ message.content }} </p>
+        
+        <!-- Buraya başka bir durum ekleyebilirsiniz -->
+      
+        </li>
+
+        {% else %}
+    <!-- Başka bir durumu ele almak için buraya kod ekleyebilirsiniz -->
+        {% endif %}
+        
+        
+
+        {%endfor%}
+        
+   
+</ul>
+
+
+<div class="mt-4">
+    <h2>Mesaj Gönder</h2>
+    <form method="post" action="{%url 'send_message'%}">
+        {% csrf_token %}
+        
+            <div class="form-group my-1">
+                <label for="message">Mesaj:</label>
+                <!-- <textarea class="form-control my-2" id="message" name="message[]" rows="4" placeholder="Enter your message..."></textarea> -->
+                <input type="text" class="form-control my-2" id="message" name="message[]" rows="4">
+            </div>
+    
+        <button type="submit" class="btn btn-secondary my-2">Send</button>
+    </form>
+</div>
+
+{%endblock%}

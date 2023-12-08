@@ -1,0 +1,267 @@
+{%extends 'trainer_dashboard.html'%}
+
+{% load static %}
+
+
+{%block title%}Program Oluştur{%endblock%}
+
+
+
+
+{%block content%}
+
+
+<h1 class="display-6 mt-2 mb-3">Program Oluştur</h1>
+
+
+
+<div>
+    <form method="post" action="{%url 'create_program'%}">
+        {%csrf_token%}
+        <h5>Kullanıcılar</h5>
+        {%for client in clients%}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="client" value="{{client.user.id}}" id="{{client}}">
+                <label class="form-check-label" for="{{client}}">
+                  {{client.user.username}}
+                </label>
+              </div>
+    
+              {%endfor%}
+             
+              <div class="form-group my-3">
+                <label for="id_sdate">Başlangıç Tarihi:</label>
+                <input type="date" name="start_date" id="id_sdate" class="form-control" required>
+            </div>
+            <div class="form-group my-3">
+              <label for="id_edate">Bitiş Tarihi:</label>
+              <input type="date" name="end_date" id="id_edate" class="form-control" required>
+          </div>
+        <div class="container mt-5">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Pazartesi</th>
+                  <th scope="col">Salı</th>
+                  <th scope="col">Çarşamba</th>
+                  <th scope="col">Perşembe</th>
+                  <th scope="col">Cuma</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown1')">Egzersiz Seç</button>
+                    <div id="dropdown1" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio1" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown2')">Egzersiz Seç</button>
+                    <div id="dropdown2" class="dropdown-content">
+                      {%for movement in movements%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio2" value="{{movement.id}}" id="{{movement}}">
+                        <label class="form-check-label" for="{{movement}}">
+                          {{movement.name}} {{movement.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown3')">Egzersiz Seç</button>
+                    <div id="dropdown3" class="dropdown-content">
+                      {%for movement in movements%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio3" value="{{movement.id}}" id="{{movement}}">
+                        <label class="form-check-label" for="{{movement}}">
+                          {{movement.name}} {{movement.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown4')">Egzersiz Seç</button>
+                    <div id="dropdown4" class="dropdown-content">
+                      {%for movement in movements%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio4" value="{{movement.id}}" id="{{movement}}">
+                        <label class="form-check-label" for="{{movement}}">
+                          {{movement.name}} {{movement.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                  <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown5')">Egzersiz Seç</button>
+                    <div id="dropdown5" class="dropdown-content">
+                      {%for movement in movements%}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio5" value="{{movement.id}}" id="{{movement}}">
+                        <label class="form-check-label" for="{{movement}}">
+                          {{movement.name}} {{movement.calory}}
+                        </label>
+                      </div>
+                      {%endfor%}
+                    </div></td>
+                </tr>
+
+                <tr>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown6')">Egzersiz Seç</button>
+                      <div id="dropdown6" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio6" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown7')">Egzersiz Seç</button>
+                      <div id="dropdown7" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio7" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown8')">Egzersiz Seç</button>
+                      <div id="dropdown8" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio8" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown9')">Egzersiz Seç</button>
+                      <div id="dropdown9" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio9" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown10')">Egzersiz Seç</button>
+                      <div id="dropdown10" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio10" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                  </tr>
+                  <tr>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown11')">Egzersiz Seç</button>
+                      <div id="dropdown11" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio11" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown12')">Egzersiz Seç</button>
+                      <div id="dropdown12" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio12" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown13')">Egzersiz Seç</button>
+                      <div id="dropdown13" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio13" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown14')">Egzersiz Seç</button>
+                      <div id="dropdown14" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio14" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                    <td><button type="button" class="dropdown-button btn btn-white" onclick="toggleDropdown('dropdown15')">Egzersiz Seç</button>
+                      <div id="dropdown15" class="dropdown-content">
+                        {%for movement in movements%}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio15" value="{{movement.id}}" id="{{movement}}">
+                          <label class="form-check-label" for="{{movement}}">
+                            {{movement.name}} {{movement.calory}}
+                          </label>
+                        </div>
+                        {%endfor%}
+                      </div></td>
+                  </tr>
+                
+                <!-- Diğer satırları buraya ekleyebilirsiniz -->
+              </tbody>
+            </table>
+          </div>
+          <h5>Hedef</h5>
+          {%for subject in subjects%}
+          <div class="form-check my-3">
+              <input class="form-check-input" type="radio" name="subject" value="{{subject.id}}" id="{{subject}}">
+              <label class="form-check-label" for="{{subject}}">
+                {{subject.name}}
+              </label>
+            </div>
+  
+            {%endfor%}
+
+            <button  type="submit" class="btn btn-secondary mt-3">Oluştur</button>
+    </form>
+</div>
+
+
+
+<script>
+    function toggleDropdown(dropdownId) {
+      var dropdown = document.getElementById(dropdownId);
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      } else {
+        // Hide all other dropdowns
+        var allDropdowns = document.querySelectorAll('.dropdown-content');
+        allDropdowns.forEach(function(item) {
+          item.style.display = 'none';
+        });
+  
+        // Show the clicked dropdown
+        dropdown.style.display = "block";
+      }
+    }
+  </script>
+
+
+
+
+{%endblock%}

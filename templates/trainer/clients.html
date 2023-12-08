@@ -1,0 +1,56 @@
+{%extends 'trainer_dashboard.html'%}
+
+{% load static %}
+
+
+{%block title%}Danışanlar{%endblock%}
+
+
+
+
+{%block content%}
+
+
+<h1 class="display-6 mt-2 mb-3">Danışanlar</h1>
+
+<div style="width: 100%;">
+    
+
+    <div class=" d-flex justify-content-between mt-1 row"  >
+        {%for client in clients%}
+     
+        <a href="{%url 'client_detail' client.id %}" style="text-decoration: none; color: black;">
+        <div class="d-flex justify-content-start">
+        <div class="mt-4">
+            <h2 class="py-1"><b>{{client.user.first_name}} {{client.user.last_name}}</b> </h2> 
+            <h2 class=" py-1">    {{client.birthday}} </h2>
+            <h2 class=" py-1">     {{client.user.email}} </h2>
+            <h2 class=" py-1">   {{client.number}} </h2>
+        </div>
+        <div class="img">
+        {% if client.image %}
+        <img src="{{ client.image.url }}" alt="Profile Image" class="object-fit-md-cover border rounded-circle" style="width: 150px; height: 150px;">
+        {% else %}
+        <p>No profile image available.</p>
+        {% endif %}
+        </div>
+
+
+        </div>
+        </a>
+        {%endfor%}
+    </div>
+        
+   
+
+    
+
+
+</div>
+
+
+
+
+
+
+{%endblock%}

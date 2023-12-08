@@ -1,0 +1,104 @@
+{%extends 'client_dashboard.html'%}
+
+{% load static %}
+
+
+{%block title%}Program{%endblock%}
+
+
+
+
+{%block content%}
+<h1 class="display-6 mt-2 mb-3">Program</h1>
+
+
+
+
+    <div class="container mt-5">
+        <h2>{{programs.name}}</h2>
+        <hr>
+        <table class="table ">
+          <tbody>
+            <tr>
+              <th scope="row">Pazartesi</th>
+              {%for monday in programs.monday.all%}
+                <td>{{monday.name}} {{monday.sets}}-{{monday.repetition}}. {{monday.calory}} </td> 
+            {%endfor%}
+            </tr>
+            <tr>
+              <th scope="row">Salı</th>
+              {%for tuesday in programs.tuesday.all%}
+                <td> {{tuesday.name}} {{tuesday.sets}}-{{tuesday.repetition}}. {{tuesday.calory}} </td> 
+                {%endfor%}
+            </tr>
+            <tr>
+              <th scope="row">Carşamba</th>
+              {%for wednesday in programs.wednesday.all%}
+                <td>{{wednesday.name}} {{wednesday.sets}}-{{wednesday.repetition}}. {{wednesday.calory}} </td> 
+                {%endfor%}
+            </tr>
+            <tr>
+                <th scope="row">Perşembe</th>
+                {%for thursday in programs.thursday.all%}
+                <td> {{thursday.name}} {{thursday.sets}}-{{thursday.repetition}}. {{thursday.calory}}</td> 
+                {%endfor%}
+              </tr>
+              <tr>
+                <th scope="row">Cuma</th>
+                {%for friday in programs.friday.all%}
+                <td>{{friday.name}} {{friday.sets}}-{{friday.repetition}}. {{friday.calory}}</td> 
+                {%endfor%}
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    
+      
+<!-- 
+      <video width="640" height="360" controls>
+        <source src="https://www.youtube.com/watch?v=KnuEf90uHFU" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <video width="640" height="360" controls>
+      <source src="https://www.youtube.com/watch?v=KnuEf90uHFU" type="video/mp4">
+      Tarayıcınız video etiketini desteklemiyor.
+  </video>  -->
+  
+  {%for link in links%}
+  
+  <div class="container my-5">
+    <h5>{{link.name}}</h5>
+  <iframe width="400" height="235" src="https://www.youtube.com/embed/{{link.videoUrl}}" frameborder="0" allowfullscreen></iframe> 
+  </div>
+  {%endfor%}
+  {%for link in links1%}
+  
+  <div class="container my-5">
+    <h5>{{link.name}}</h5>
+  <iframe width="400" height="235" src="https://www.youtube.com/embed/{{link.videoUrl}}" frameborder="0" allowfullscreen></iframe> 
+  </div>
+  {%endfor%}
+  {%for link in links2%}
+  
+  <div class="container my-5">
+    <h5>{{link.name}}</h5>
+  <iframe width="400" height="235" src="https://www.youtube.com/embed/{{link.videoUrl}}" frameborder="0" allowfullscreen></iframe> 
+  </div>
+  {%endfor%}
+  {%for link in links3%}
+  
+  <div class="container my-5">
+    <h5>{{link.name}}</h5>
+  <iframe width="400" height="235" src="https://www.youtube.com/embed/{{link.videoUrl}}" frameborder="0" allowfullscreen></iframe> 
+  </div>
+  {%endfor%}
+  {%for link in links4%}
+  
+  <div class="container my-5">
+    <h5>{{link.name}}</h5>
+  <iframe width="400" height="235" src="https://www.youtube.com/embed/{{link.videoUrl}}" frameborder="0" allowfullscreen></iframe> 
+  </div>
+  {%endfor%}
+
+{%endblock%}

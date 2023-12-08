@@ -1,0 +1,107 @@
+{%extends 'trainer_dashboard.html'%}
+
+{% load static %}
+
+
+{%block title%}Profile{%endblock%}
+
+
+
+
+{%block content%}
+
+<h1 class="display-6 mt-2 mb-1">Profil</h1>
+
+<div class="d-flex justify-content-between mt-1">
+    <div class="mt-4">
+        <h2 class="display-4 py-1"><b>{{trainer.user.first_name}} {{trainer.user.last_name}}</b> </h2> 
+        
+        
+        <h2 class="display-6 py-1">     {{trainer.user.email}} </h2>
+        <h2 class="display-6 py-1">   {{trainer.number}} </h2>
+        <div class="d-flex"><h2 class="display-6 py-1">Uzmanlıklar: </h2>
+            {%for subject in trainer.speciality.all%}
+            <h2 class="display-6 py-1 mx-2">   {{subject.name}} </h2>
+            {%endfor%}
+        </div>
+        
+    </div>
+    <div class="img">
+    {% if trainer.image %}
+    <img src="{{ trainer.image.url }}" alt="Profile Image" class="object-fit-md-cover border rounded-circle" style="width: 350px; height: 350px;">
+    {% else %}
+    <p>No profile image available.</p>
+    {% endif %}
+    
+    </div>
+    <!-- <h2 class="display-5"> {{client.user.first_name}} {{client.user.last_name}}</h2> -->
+
+    <!-- number=models.DecimalField(max_digits=15,decimal_places=0,null=True)
+    profilePhoto=models.ImageField()
+    image=models.ImageField(upload_to="images",blank=True)
+    trainer=models.ForeignKey(Trainer,on_delete=models.CASCADE)
+    exerciseProgram=models.ManyToManyField(Exercise,blank=True)
+    nutritionProgram=models.ManyToManyField(Nutrition,blank=True)
+    # measurement=models.ForeignKey(Measurement,on_delete=models.SET_NULL,null=True,blank=True)
+    measurement=models.ManyToManyField(Measurement,blank=True)
+    purpose=models.ForeignKey(Subject,on_delete=models.SET_NULL,null=True,blank=True) -->
+
+
+   
+</div>
+
+
+
+
+<form method="post" action="{%url 'trainer_profile'%}" enctype="multipart/form-data" class="mt-5">
+    {% csrf_token %}
+    <!-- <div class="form-group my-1">
+        <label for="id_email">Email:</label>
+        <input type="email" name="email" id="id_email" class="form-control" required>
+    </div> -->
+    
+
+    <!-- Profil resmi yükleme girişi -->
+    <div class="form-group my-1">
+        <label for="id_gsm_number">GSM Number:</label>
+        <input type="text" name="number" id="id_gsm_number"  class="form-control" required>
+    </div>
+    <div class="form-group my-1">
+        <label for="id_profile_image">Profil Resmi Yükle:</label>
+        <input type="file" name="profile" id="id_profile_image">
+    </div>
+
+    <div class="form-group my-1">
+        {%for subject in subjects%}
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="specialities[]" value="{{subject.id}}" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              {{subject.name}}
+            </label>
+          </div>
+
+          {%endfor%}
+        
+          <!-- <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+            <label class="form-check-label" for="defaultCheck2">
+              Checkbox 2
+            </label>
+          </div> -->
+    </div>
+
+
+    <button  type="submit" class="btn btn-secondary mt-3">Güncelle</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
